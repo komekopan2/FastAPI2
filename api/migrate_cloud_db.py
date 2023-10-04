@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
-from api.db import DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, Base
-from sqlalchemy.exc import OperationalError, InternalError
+from sqlalchemy.exc import InternalError, OperationalError
 from sqlalchemy.sql import text
+
+from api.db import DB_HOST, DB_PASSWORD, DB_PORT, DB_USER
+from api.models.recipe import Base
 
 DB_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/?charset=utf8"
 DEMO_DB_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/demo?charset=utf8"
