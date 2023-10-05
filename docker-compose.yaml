@@ -1,8 +1,9 @@
-version: '3'
+version: "3"
 
 services:
-
   demo-api:
+    depends_on:
+      - db
     build:
       context: "./"
       dockerfile: "Dockerfile.cloud"
@@ -18,9 +19,9 @@ services:
       context: "./"
       dockerfile: "Dockerfile.db"
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' # rootアカウントをパスワードなしで作成
-      MYSQL_DATABASE: 'demo' # 初期データベースとしてdemoを設定
-      TZ: 'Asia/Tokyo' # タイムゾーンを日本時間に設定
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # rootアカウントをパスワードなしで作成
+      MYSQL_DATABASE: "demo" # 初期データベースとしてdemoを設定
+      TZ: "Asia/Tokyo" # タイムゾーンを日本時間に設定
     volumes:
       - mysql_data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password # MySQL8.0での認証プラグインを指定
