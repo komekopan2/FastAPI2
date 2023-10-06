@@ -4,9 +4,12 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /src
 COPY api api
 COPY entrypoint.sh ./
+COPY wait-for-it.sh /wait-for-it.sh
 
 RUN pip3 install --upgrade pip
 RUN pip3 install "uvicorn[standard]"
 RUN pip3 install --no-cache-dir --upgrade -r /src/api/requirements.txt
+
+RUN chmod +x /wait-for-it.sh
 
 ENTRYPOINT ["bash","entrypoint.sh"]
