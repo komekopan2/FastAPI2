@@ -19,6 +19,10 @@ class Recipe_id_create_update(Recipe_id):
     updated_at: datetime
 
 
+class Initialize_post_request((Recipe_id_create_update)):
+    pass
+
+
 class Post_request(Recipe_simple):
     pass
 

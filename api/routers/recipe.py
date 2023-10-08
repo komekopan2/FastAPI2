@@ -6,6 +6,14 @@ import api.cruds.recipe as recipe_crud
 router = APIRouter()
 
 
+@router.post("/recipes/init/", response_model=recipe_schema.Post_responce)
+async def init_db_data(request_body: recipe_schema.Initialize_post_request, db: Session = Depends(get_db)):
+    if not request_body:
+        return {"message": "Recipe creation failed!", "required": "id, title, making_time, serves, ingredients, cost, created_at, updated_at"}
+    db_recipe = recipe_crud.init_db_data(db, request_body)
+    return {"message": "Recipe successfully created!", "recipe": [db_recipe]}
+
+
 @router.post("/recipes/", response_model=recipe_schema.Post_responce)
 async def create_recipe(request_body: recipe_schema.Post_request, db: Session = Depends(get_db)):
     if not request_body:

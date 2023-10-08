@@ -5,6 +5,14 @@ import api.models.recipe as recipe_model
 import api.schemas.recipe as recipe_schema
 
 
+def init_db_data(db: Session, data_init: recipe_schema.Initialize_post_request):
+    original = recipe_model.Recipe(**data_init.dict())
+    db.add(original)
+    db.commit()
+    db.refresh(original)
+    return original
+
+
 def create_recipe(db: Session, recipe_create: recipe_schema.Post_request):
     original = recipe_model.Recipe(**recipe_create.dict())
     db.add(original)
